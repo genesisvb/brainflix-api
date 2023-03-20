@@ -49,16 +49,15 @@ videoRouter.get("/", (request, response) => {
             description: body.description,
             channel: "My Super Cool Channel",
             timestamp: Date.now(),
-            image:  "./public/images/Upload-video-preview.jpg",
+            image: body.image,
             comments: []
         }
 
-        console.log("request body ", body);
         videoUploadData.push(newVideo);
 
         writeVideos(videoUploadData);
 
-        response.status(201).json(videoUploadData);
+        response.status(201).json(newVideo);
 
     })
 module.exports = videoRouter
