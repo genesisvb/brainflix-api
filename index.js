@@ -12,6 +12,5 @@ app.use("/videos", videosRoute );
 app.use(express.static('public'))
 
 app.listen(PORT, () => {
-// console.log('working')
 });
 
