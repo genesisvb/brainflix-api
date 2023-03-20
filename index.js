@@ -5,15 +5,13 @@ const PORT = 5000;
 const videosRoute  = require("./routes/videos.js");
 
 
-// app.use(express.static('public'));
+
 app.use(cors())
 app.use(express.json()); 
 app.use("/videos", videosRoute );
+app.use(express.static('public'))
 
 app.listen(PORT, () => {
 // console.log('working')
-})
+});
 
-// app.get("/", (request, response) => {
-
-// })

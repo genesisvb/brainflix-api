@@ -3,14 +3,16 @@ const videoRouter = express.Router();
 const { v4: uuid } = require("uuid");
 const fs = require("fs");
 
-function writeVideos () {
-    const newData = JSON.stringify("./data/videosCopy.json")
-    fs.writeFileSync("./data/videosCopy.json", newData)
+const dataFile = "./data/videos.json";
+
+function writeVideos(data) {
+    const newData = JSON.stringify(data);
+    fs.writeFileSync(dataFile, newData)
 
 }
 
 function readData() {
-    const videoFile = fs.readFileSync("./data/videosCopy.json")
+    const videoFile = fs.readFileSync(dataFile)
     const videosData = JSON.parse(videoFile)
     return videosData;
 }
@@ -31,7 +33,6 @@ videoRouter.get("/", (request, response) => {
 
     videoRouter.get("/:videoId", (request, response) => {
        const videoData = readData();
-       console.log("getting single video")
        const selectedVideo = videoData.find((video) => video.id === request.params.videoId)
 
        response.status(200).json(selectedVideo);
@@ -48,7 +49,7 @@ videoRouter.get("/", (request, response) => {
             description: body.description,
             channel: "My Super Cool Channel",
             timestamp: Date.now(),
-            image:  "",
+            image:  "./public/images/Upload-video-preview.jpg",
             comments: []
         }
 
